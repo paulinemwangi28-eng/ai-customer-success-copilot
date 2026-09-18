@@ -19,14 +19,14 @@ Enter basic customer information:
 
 Click **Analyze Customer** and get:
 
-1. **Customer Health** — Healthy / Needs Attention / At Risk
-2. **Churn Risk** — Low / Medium / High
-3. **Risk Factors** — explainable reasons behind the score
-4. **Customer Goal** — echoed for context
-5. **Product Adoption Assessment**
-6. **Recommended Next Action**
-7. **Suggested Customer Response** — ready-to-edit message template
-8. **Expansion / Cross-sell Opportunity**
+1. **Customer Health Score (0–100)** — with a plain-English explanation of the score
+2. **Health Status** — Healthy / Needs Attention / At Risk
+3. **Churn Risk** — Low / Medium / High, with the top 3 risk factors and what's driving the risk
+4. **Recommended Customer Success Action Plan** — 3–5 prioritized, health-aware steps with timeframes
+5. **Product Adoption Analysis** — Low / Moderate / High, with guidance to improve adoption
+6. **Suggested Customer Response** — ready-to-edit message template
+7. **Expansion Opportunity** — conservative upsell/cross-sell assessment (only when the profile supports it)
+8. **Methodology panel** — built-in "How This Works" explanation of the scoring rules
 
 ## 🧠 How It Works
 
@@ -35,10 +35,11 @@ The analysis engine is **rule-based and fully transparent** (`analyze_customer()
 - Each input (usage, tickets, inactivity, message sentiment) contributes weighted points
   to a risk score (0–100).
 - Every rule that fires adds a human-readable risk factor, so results are explainable.
-- Thresholds map the score to health status and churn risk:
-  - `< 25` → Healthy / Low risk
-  - `25–49` → Needs Attention / Medium risk
-  - `>= 50` → At Risk / High risk
+- Health Score = 100 − total risk points. Thresholds:
+  - `76–100` → Healthy / Low churn risk
+  - `51–75` → Needs Attention / Medium churn risk
+  - `0–50` → At Risk / High churn risk
+- The action plan, adoption guidance, and expansion assessment all derive from the same explainable signals.
 - Message sentiment is detected with a small keyword lexicon (positive/negative words).
 
 No API keys, no external services — runs completely offline.
